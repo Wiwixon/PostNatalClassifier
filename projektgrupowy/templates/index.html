@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankieta Medyczna</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            background-color: #444;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        fieldset {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Zmiana koloru tła dla nieparzystych fieldsetów */
+        fieldset:nth-child(odd) {
+            background-color: #444;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ankieta ryzyka depresji poporodowej</h1>
+    </header>
+
+    <nav>
+        <a href="#o-projekcie">O projekcie</a>
+        <a href="#klasyfikator">Klasyfikator</a>
+        <a href="#depresja-poporodowa">Depresja poporodowa</a>
+        <a href="#statystyki">Statystyki</a>
+    </nav>
+
+    <form action="#" method="post">
+
+        <fieldset>
+
+            <label>
+                Wybierz swój wiek:
+                <select name="wiek">
+                    <option value="25-30">25-30</option>
+                    <option value="30-35">30-35</option>
+                    <option value="35-40">35-40</option>
+                    <option value="40-45">40-45</option>
+                    <option value="45-50">45-50</option>
+                </select>
+            </label>
+        </fieldset>        
+<fieldset>
+            <legend>Pytanie 1:</legend>
+            <label>
+                <input type="radio" name="pytanie1" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie1" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie1" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <!-- Dodaj kolejne pytania w podobny sposób -->
+        <fieldset>
+            <legend>Pytanie 2:</legend>
+            <label>
+                <input type="radio" name="pytanie2" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie2" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie2" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Pytanie 3:</legend>
+            <label>
+                <input type="radio" name="pytanie3" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie3" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie3" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Pytanie 4:</legend>
+            <label>
+                <input type="radio" name="pytanie4" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie4" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie4" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Pytanie 5:</legend>
+            <label>
+                <input type="radio" name="pytanie5" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie5" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie5" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Pytanie 6:</legend>
+            <label>
+                <input type="radio" name="pytanie6" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie6" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie6" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Pytanie 7:</legend>
+            <label>
+                <input type="radio" name="pytanie7" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie7" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie7" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Pytanie 8:</legend>
+            <label>
+                <input type="radio" name="pytanie8" value="odp1"> Odpowiedź 1
+            </label>
+            <label>
+                <input type="radio" name="pytanie8" value="odp2"> Odpowiedź 2
+            </label>
+            <label>
+                <input type="radio" name="pytanie8" value="odp3"> Odpowiedź 3
+            </label>
+        </fieldset>
+
+        <button type="submit">Wyślij</button>
+    </form>
+</body>
+</html>

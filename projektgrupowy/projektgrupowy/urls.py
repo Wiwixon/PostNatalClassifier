@@ -14,12 +14,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from . import views
 from django.contrib import admin
 from django.urls import path
-from . import views
+from django.http import HttpResponse  # importujemy moduł HttpResponse
+
+def index(request):  # definiujemy funkcję widoku dla głównej strony
+    return HttpResponse("Witaj na stronie głównej!")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.index),
+    path('suti/', views.siema),
+    path('', index),  # dodajemy pusty wzorzec dla głównej strony
+    path('klasyfikator/', views.home),
 
 ]
