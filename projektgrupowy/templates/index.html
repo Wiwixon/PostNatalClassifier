@@ -92,7 +92,9 @@
         <a href="#statystyki">Statystyki</a>
     </nav>
 
-    <form action="#" method="post">
+
+    <form action="{% url 'klasyfikacja' %}" method="post">
+
         {% csrf_token %}
 
         <fieldset>
@@ -100,11 +102,11 @@
             <label>
                 Wybierz swój wiek:
                 <select name="wiek">
-                    <option value="25-30">25-30</option>
-                    <option value="30-35">30-35</option>
-                    <option value="35-40">35-40</option>
-                    <option value="40-45">40-45</option>
-                    <option value="45-50">45-50</option>
+                    <option value="1">25-30</option>
+                    <option value="2">30-35</option>
+                    <option value="3">35-40</option>
+                    <option value="4">40-45</option>
+                    <option value="5">45-50</option>
                 </select>
             </label>
         </fieldset>        

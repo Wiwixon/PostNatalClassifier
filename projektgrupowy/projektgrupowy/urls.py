@@ -21,6 +21,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('suti/', views.siema),
-    path('klasyfikator/', views.home),
-    path('klasyfikator/info/', views.info)
+
+    path('klasyfikator/info/', views.info),
+    path('', views.home),
+    path('klasyfikacja/', views.classify, name='klasyfikacja')
 ]
