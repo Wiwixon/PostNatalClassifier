@@ -86,14 +86,13 @@
     </header>
 
     <nav>
-        <a href="info/">O projekcie</a>
-        <a href="/klasyfikator">Klasyfikator</a>
+        <a href="#o-projekcie">O projekcie</a>
+        <a href="#klasyfikator">Klasyfikator</a>
         <a href="#depresja-poporodowa">Depresja poporodowa</a>
         <a href="#statystyki">Statystyki</a>
     </nav>
 
     <form action="#" method="post">
-        {% csrf_token %}
 
         <fieldset>
 
@@ -109,107 +108,107 @@
             </label>
         </fieldset>        
 <fieldset>
-            <legend>Poczucie smutku:</legend>
+            <legend>Pytanie 1:</legend>
             <label>
-                <input type="radio" name="Poczucie_smutku" value="2"> Tak
+                <input type="radio" name="pytanie1" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Poczucie_smutku" value="0"> Nie
+                <input type="radio" name="pytanie1" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Poczucie_smutku" value="1"> Czasami
+                <input type="radio" name="pytanie1" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <!-- Dodaj kolejne pytania w podobny sposób -->
         <fieldset>
-            <legend>Nerwowe zachowanie w stosunku do partnera lub dziecka:</legend>
-             <label>
-                <input type="radio" name="Nerwowe_zachowanie_w_stosunku_do_partnera_lub_dziecka" value="2"> Tak
+            <legend>Pytanie 2:</legend>
+            <label>
+                <input type="radio" name="pytanie2" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Nerwowe_zachowanie_w_stosunku_do_partnera_lub_dziecka" value="0"> Nie
+                <input type="radio" name="pytanie2" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Nerwowe_zachowanie_w_stosunku_do_partnera_lub_dziecka" value="1"> Czasami
+                <input type="radio" name="pytanie2" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Problemy ze spaniem:</legend>
-             <label>
-                <input type="radio" name="Problemy_ze_spaniem" value="2"> Tak
+            <legend>Pytanie 3:</legend>
+            <label>
+                <input type="radio" name="pytanie3" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Problemy_ze_spaniem" value="0"> Nie
+                <input type="radio" name="pytanie3" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Problemy_ze_spaniem" value="1"> Czasami
+                <input type="radio" name="pytanie3" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Problemy z koncentracją:</legend>
-             <label>
-                <input type="radio" name="Problemy_z_koncentracją" value="2"> Tak
+            <legend>Pytanie 4:</legend>
+            <label>
+                <input type="radio" name="pytanie4" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Problemy_z_koncentracją" value="0"> Nie
+                <input type="radio" name="pytanie4" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Problemy_z_koncentracją" value="1"> Czasami
+                <input type="radio" name="pytanie4" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Przejadanie się lub niedojadanie:</legend>
-             <label>
-                <input type="radio" name="Przejadanie_się_lub_niedojadanie" value="2"> Tak
+            <legend>Pytanie 5:</legend>
+            <label>
+                <input type="radio" name="pytanie5" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Przejadanie_się_lub_niedojadanie" value="0"> Nie
+                <input type="radio" name="pytanie5" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Przejadanie_się_lub_niedojadanie" value="1"> Czasami
+                <input type="radio" name="pytanie5" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Poczucie winy:</legend>
-             <label>
-                <input type="radio" name="Poczucie_winy" value="2"> Tak
+            <legend>Pytanie 6:</legend>
+            <label>
+                <input type="radio" name="pytanie6" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Poczucie_winy" value="0"> Nie
+                <input type="radio" name="pytanie6" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Poczucie_winy" value="1"> Czasami
+                <input type="radio" name="pytanie6" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Problem z przywiązaniem do dziecka:</legend>
-             <label>
-                <input type="radio" name="Problem_z_przywiązaniem_do_dziecka" value="2"> Tak
+            <legend>Pytanie 7:</legend>
+            <label>
+                <input type="radio" name="pytanie7" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Problem_z_przywiązaniem_do_dziecka" value="0"> Nie
+                <input type="radio" name="pytanie7" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Problem_z_przywiązaniem_do_dziecka" value="1"> Czasami
+                <input type="radio" name="pytanie7" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
         <fieldset>
-            <legend>Próba samobójcza:</legend>
+            <legend>Pytanie 8:</legend>
             <label>
-                <input type="radio" name="Próba_samobójcza" value="2"> Tak
+                <input type="radio" name="pytanie8" value="odp1"> Odpowiedź 1
             </label>
             <label>
-                <input type="radio" name="Próba_samobójcza" value="0"> Nie
+                <input type="radio" name="pytanie8" value="odp2"> Odpowiedź 2
             </label>
             <label>
-                <input type="radio" name="Próba_samobójcza" value="1"> Nie chcę mówić
+                <input type="radio" name="pytanie8" value="odp3"> Odpowiedź 3
             </label>
         </fieldset>
 
