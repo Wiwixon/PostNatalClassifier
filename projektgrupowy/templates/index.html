@@ -86,10 +86,10 @@
     </header>
 
     <nav>
-        <a href="info/">O projekcie</a>
-        <a href="/klasyfikator">Klasyfikator</a>
-        <a href="#depresja-poporodowa">Depresja poporodowa</a>
-        <a href="#statystyki">Statystyki</a>
+        <a href="{% url 'info' %}">O projekcie</a>
+        <a href="{% url 'klasyfikator' %}">Klasyfikator</a>
+        <a href="{% url 'o-depresji' %}">Depresja poporodowa</a>
+        <a href="{% url 'statystyki' %}">Statystyki</a>
     </nav>
 
 
