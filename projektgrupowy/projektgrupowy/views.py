@@ -45,7 +45,7 @@ def classify(request):
         dane = np.array([pytania])
         print(pytania)
 
-
+        x = 2
 
         wynik = xgb_model.predict(dane)
 
