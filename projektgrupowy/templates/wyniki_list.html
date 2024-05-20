@@ -9,32 +9,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statystyki odpowiedzi</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        .response-stats {
-            text-align: center;
-            margin-top: 110px; /* Dodatkowy odstęp na górze */
-            position: relative; /* Zmień na relative */
-            z-index: 1;
-        }
-        canvas {
-            max-width: 300px;
-            height: auto;
-        }
-    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    /* Styl dla wykresów */
+    canvas {
+        width: 90vw; /* Szerokość na 90% szerokości widoku */
+        max-width: 600px; /* Maksymalna szerokość */
+        margin: 0 auto; /* Wycentrowanie */
+        display: block; /* Zapobiega domyślnej przestrzeni nad i pod canvas */
+    }
+    </style>
+
 </head>
 <body>
     <div class="response-stats">
-        <h2>Statystyki odpowiedzi</h2>
+        <center><h2>Statystyki odpowiedzi</h2></center>
+        <canvas id="wynikChart"></canvas>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <canvas id="wiekChart"></canvas>
         <canvas id="poczucieSmutkuChart"></canvas>
         <canvas id="nerwoweZachowanieChart"></canvas>
@@ -44,34 +41,45 @@
         <canvas id="poczucieWinyChart"></canvas>
         <canvas id="problemZPrzywiazaniemChart"></canvas>
         <canvas id="probaSamobojczaChart"></canvas>
+
     </div>
 
     <script>
         // Funkcja do tworzenia wykresu
-        function createChart(ctx, labels, data, title) {
-            const colors = ['#ffcccb', '#add8e6', '#90ee90']; // Kolory dla odpowiedzi
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: title,
-                        data: data,
-                        backgroundColor: colors,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax: 50 // Maksymalna wartość na osi Y
-                        }
-                    }
+    function createChart(ctx, labels, data, title) {
+    const colors = ['#ffcccb', '#add8e6', '#90ee90']; // Kolory dla odpowiedzi
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: data,
+                backgroundColor: colors,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 50 // Maksymalna wartość na osi Y
                 }
-            });
+            }
         }
+    });
+
+    // Dodanie tytułu nad wykresem jako nagłówek HTML
+    const chartTitle = document.createElement('h3');
+    chartTitle.textContent = title;
+    chartTitle.style.textAlign = 'center';
+    chartTitle.style.color = 'white'; // Biały kolor tekstu
+    chartTitle.style.fontSize = '24px'; // Zmiana wielkości tekstu
+    ctx.canvas.parentNode.insertBefore(chartTitle, ctx.canvas);
+}
+
+
 
         // Dane dla wykresów (przekazane z widoku)
         const wiekLabels = {{ wiek_labels|safe }};
@@ -92,26 +100,82 @@
         const problemZPrzywiazaniemData = {{ problem_z_przywiazaniem_data|safe }};
         const probaSamobojczaLabels = {{ proba_samobojcza_labels|safe }};
         const probaSamobojczaData = {{ proba_samobojcza_data|safe }};
+        const wynikLabels = {{ wynik_labels|safe }};
+        const wynikData = {{ wynik_data|safe }};
 
-        // Przetłumacz odpowiedzi
-        const translateLabels = (labels) => {
-            return labels.map(label => {
-                if (label === 0) return 'Nie';
-                else if (label === 1) return 'Czasami';
-                else return 'Tak';
-            });
-        }
+      function translateLabels(chartType, labels) {
+    const translations = {
+        'wiekChart': {
+            1: '25-30',
+            2: '30-35',
+            3: '35-40',
+            4: '40-45',
+            5: '45-50'
+        },
+        'poczucieSmutkuChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'nerwoweZachowanieChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'problemyZeSpaniemChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'problemyZKoncentracjaChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'przejadanieSieChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'poczucieWinyChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'problemZPrzywiazaniemChart': {
+            0: 'Nie',
+            1: 'Czasami',
+            2: 'Tak'
+        },
+        'probaSamobojczaChart': {
+            0: 'Nie',
+            1: 'Tak',
+            2: 'Nie chce mowić'
+        },
+        'wynikChart': {
+            0: 'Nie',
+            1: 'Tak'
 
-        // Tworzenie wykresów
-        createChart(document.getElementById('wiekChart').getContext('2d'), translateLabels(wiekLabels), wiekData, 'Wiek');
-        createChart(document.getElementById('poczucieSmutkuChart').getContext('2d'), translateLabels(poczucieSmutkuLabels), poczucieSmutkuData, 'Poczucie Smutku');
-        createChart(document.getElementById('nerwoweZachowanieChart').getContext('2d'), translateLabels(nerwoweZachowanieLabels), nerwoweZachowanieData, 'Nerwowe Zachowanie');
-        createChart(document.getElementById('problemyZeSpaniemChart').getContext('2d'), translateLabels(problemyZeSpaniemLabels), problemyZeSpaniemData, 'Problemy ze Spaniem');
-        createChart(document.getElementById('problemyZKoncentracjaChart').getContext('2d'), translateLabels(problemyZKoncentracjaLabels), problemyZKoncentracjaData, 'Problemy z Koncentracją');
-        createChart(document.getElementById('przejadanieSieChart').getContext('2d'), translateLabels(przejadanieSieLabels), przejadanieSieData, 'Przejadanie Się');
-        createChart(document.getElementById('poczucieWinyChart').getContext('2d'), translateLabels(poczucieWinyLabels), poczucieWinyData, 'Poczucie Winy');
-        createChart(document.getElementById('problemZPrzywiazaniemChart').getContext('2d'), translateLabels(problemZPrzywiazaniemLabels), problemZPrzywiazaniemData, 'Problem z Przywiązaniem');
-        createChart(document.getElementById('probaSamobojczaChart').getContext('2d'), translateLabels(probaSamobojczaLabels), probaSamobojczaData, 'Próba Samobójcza');
+        },
+    };
+
+    return labels.map(label => translations[chartType][label]);
+}
+
+
+
+       createChart(document.getElementById('wiekChart').getContext('2d'), translateLabels('wiekChart', wiekLabels), wiekData, 'Wiek');
+    createChart(document.getElementById('poczucieSmutkuChart').getContext('2d'), translateLabels('poczucieSmutkuChart', poczucieSmutkuLabels), poczucieSmutkuData, 'Poczucie Smutku');
+    createChart(document.getElementById('nerwoweZachowanieChart').getContext('2d'), translateLabels('nerwoweZachowanieChart', nerwoweZachowanieLabels), nerwoweZachowanieData, 'Nerwowe Zachowanie');
+    createChart(document.getElementById('problemyZeSpaniemChart').getContext('2d'), translateLabels('problemyZeSpaniemChart', problemyZeSpaniemLabels), problemyZeSpaniemData, 'Problemy ze Spaniem');
+    createChart(document.getElementById('problemyZKoncentracjaChart').getContext('2d'), translateLabels('problemyZKoncentracjaChart', problemyZKoncentracjaLabels), problemyZKoncentracjaData, 'Problemy z Koncentracją');
+    createChart(document.getElementById('przejadanieSieChart').getContext('2d'), translateLabels('przejadanieSieChart', przejadanieSieLabels), przejadanieSieData, 'Przejadanie Się');
+    createChart(document.getElementById('poczucieWinyChart').getContext('2d'), translateLabels('poczucieWinyChart', poczucieWinyLabels), poczucieWinyData, 'Poczucie Winy');
+    createChart(document.getElementById('problemZPrzywiazaniemChart').getContext('2d'), translateLabels('problemZPrzywiazaniemChart', problemZPrzywiazaniemLabels), problemZPrzywiazaniemData, 'Problem z Przywiązaniem');
+    createChart(document.getElementById('probaSamobojczaChart').getContext('2d'), translateLabels('probaSamobojczaChart', probaSamobojczaLabels), probaSamobojczaData, 'Próba Samobójcza');
+    // Tworzenie wykresu wyniku
+    createChart(document.getElementById('wynikChart').getContext('2d'), translateLabels('wynikChart', wynikLabels), wynikData, 'Wynik');
+
     </script>
 </body>
 </html>

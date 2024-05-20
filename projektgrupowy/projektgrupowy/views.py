@@ -42,7 +42,7 @@ def wyniki_list(request):
     fields = [
         'wiek', 'poczucie_smutku', 'nerwowe_zachowanie', 'problemy_ze_spaniem',
         'problemy_z_koncentracja', 'przejadanie_sie', 'poczucie_winy',
-        'problem_z_przywiazaniem', 'proba_samobojcza'
+        'problem_z_przywiazaniem', 'proba_samobojcza', 'wynik'
     ]
 
     stats = {}
@@ -73,6 +73,8 @@ def wyniki_list(request):
         'problem_z_przywiazaniem_data': [item['percent'] for item in stats['problem_z_przywiazaniem']],
         'proba_samobojcza_labels': [item['proba_samobojcza'] for item in stats['proba_samobojcza']],
         'proba_samobojcza_data': [item['percent'] for item in stats['proba_samobojcza']],
+        'wynik_labels': [item['wynik'] for item in stats['wynik']],
+        'wynik_data': [item['percent'] for item in stats['wynik']],
     }
 
     return render(request, 'wyniki_list.html', context)
