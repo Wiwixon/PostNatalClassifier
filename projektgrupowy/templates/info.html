@@ -3,24 +3,17 @@
 {% block title %}Projekt Grupowy - Opis{% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="background: linear-gradient(to bottom, #333, #666); padding: 20px; border-radius: 10px;">
     <div class="row">
         <div class="col-md-8 offset-md-2">
-            <div class="jumbotron mt-4">
-                <h1 class="display-4">Projekt Grupowy na Studiach</h1>
-                <p class="lead">Opis naszego projektu grupowego</p>
+            <div class="jumbotron mt-4" style="background-color: #444; color: white; padding: 30px; border-radius: 10px;">
+                <h1 class="display-4 text-center">5@KIBI'2023/24 Aplikacja webowa do zbierania danych oraz klasyfikacji ryzyka depresji poporodowej</h1>
+                <p class="lead text-center">Członkowie projektu: Miłosz Bakiera, Wiktor Kowalczyk (Kapitan Zespołu), Marcin Sutor</p>
                 <hr class="my-4">
-                <p>Projekt grupowy na studiach jest jednym z kluczowych elementów programu nauczania. To okazja dla studentów do pracy zespołowej, rozwoju umiejętności komunikacyjnych i zdobycia praktycznego doświadczenia w dziedzinie swojej specjalizacji.</p>
-                <p>Każdy projekt grupowy zazwyczaj obejmuje następujące etapy:</p>
-                <ol>
-                    <li>Określenie tematu i celów projektu.</li>
-                    <li>Podział zadań w zespole.</li>
-                    <li>Zbieranie i analiza danych lub informacji.</li>
-                    <li>Praca nad rozwiązaniem lub implementacją projektu.</li>
-                    <li>Prezentacja wyników lub raportu końcowego.</li>
-                </ol>
-                <p>W trakcie realizacji projektu grupowego studenci mogą również rozwijać umiejętności związane z planowaniem, organizacją, negocjacjami oraz zarządzaniem czasem i zasobami.</p>
-                <p>Projekty grupowe są często postrzegane jako ważne narzędzie dydaktyczne, które przygotowuje studentów do pracy w dynamicznym środowisku biznesowym oraz uczy ich efektywnego współdziałania w zespołach.</p>
+                <p style="text-align: justify;">Jesteśmy studentami 3 roku Politechniki Gdańskiej na kierunku Inżynieria Biomedyczna na specjalizacji Informatyka w Medycynie. Naszym celem było opracowanie, realizacja i ocena systemu webowego do zbierania, analizy oraz klasyfikacji ryzyka depresji poporodowej.</p>
+                <p style="text-align: justify;">Należało wykonać analizę istniejących danych, wytrenować klasyfikator, stworzyć system do zbierania danych od pacjentki oraz wyświetlić wyniki klasyfikacji. I ta aplikacja webowa to jest owoc naszej pracy. Wraz z chłopakami utworzyliśmy system, w którym interesantki mogą za pomocą ankiety przewidzieć, czy posiadają one depresję poporodową po urodzeniu dziecka. System wyposażony jest w wytrenowany model XGBoost.</p>
+                <p style="text-align: justify;">Dane zostały wzięte ze strony Kaggle: <a href="https://www.kaggle.com/datasets/parvezalmuqtadir2348/postpartum-depression/" target="_blank" style="color: #1e90ff;">https://www.kaggle.com/datasets/parvezalmuqtadir2348/postpartum-depression/</a></p>
+                <p style="text-align: justify;">Zachęcamy do uzupełniania ankiety, ponieważ depresja poporodowa to jest coraz częstszy problem w naszym kraju!</p>
             </div>
         </div>
     </div>
