@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Strona główna{% endblock %}
+{% block title %}Statystyki odpowiedzi{% endblock %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -10,110 +10,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Statystyki odpowiedzi</title>
     <style>
-        .main-result {
-            border: 2px solid #333;
-            padding: 10px;
-            margin-bottom: 20px;
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
         .response-stats {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
+            text-align: center;
+            margin-top: 100px; /* Dodatkowy odstęp na górze */
+            position: relative; /* Zmień na relative */
+            z-index: 1;
+        }
+        canvas {
+            max-width: 300px;
+            height: auto;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="main-result">
-        <h1>Wyniki</h1>
-        <ul>
-            {% for item in wynik_stats %}
-        <li>Wynik: {% if item.wynik == 0 %} Brak ryzyka depresji poporodowej {% elif item.wynik == 1 %} Ryzyko depresji poporodowej  {% endif %} : {{ item.percent }}%</li>
-        {% endfor %}
-        </ul>
-    </div>
-
     <div class="response-stats">
         <h2>Statystyki odpowiedzi</h2>
-
-        <h3>Wiek</h3>
-        <ul>
-            {% for item in wiek_stats %}
-            <li>Wiek: {% if item.wiek == 0 %} Mniej niż 18 lat {% elif item.wiek == 1 %} 18-30 lat {% elif item.wiek == 2 %} 31-40 lat {% elif item.wiek == 3 %} 41-50 lat {% elif item.wiek == 4 %} 51-60 lat {% else %} Powyżej 60 lat {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
+        <canvas id="wiekChart"></canvas>
+        <canvas id="poczucieSmutkuChart"></canvas>
+        <canvas id="nerwoweZachowanieChart"></canvas>
+        <canvas id="problemyZeSpaniemChart"></canvas>
+        <canvas id="problemyZKoncentracjaChart"></canvas>
+        <canvas id="przejadanieSieChart"></canvas>
+        <canvas id="poczucieWinyChart"></canvas>
+        <canvas id="problemZPrzywiazaniemChart"></canvas>
+        <canvas id="probaSamobojczaChart"></canvas>
     </div>
 
-    <div class="response-stats">
-        <h3>Poczucie smutku</h3>
-        <ul>
-            {% for item in poczucie_smutku_stats %}
-            <li>{% if item.poczucie_smutku == 0 %} Nie {% elif item.poczucie_smutku == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
+    <script>
+        // Funkcja do tworzenia wykresu
+        function createChart(ctx, labels, data, title) {
+            const colors = ['#ffcccb', '#add8e6', '#90ee90']; // Kolory dla odpowiedzi
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: title,
+                        data: data,
+                        backgroundColor: colors,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            suggestedMax: 50 // Maksymalna wartość na osi Y
+                        }
+                    }
+                }
+            });
+        }
 
-    <div class="response-stats">
-        <h3>Nerwowe zachowanie w stosunku do partnera lub dziecka</h3>
-        <ul>
-            {% for item in nerwowe_zachowanie_stats %}
-            <li> {% if item.nerwowe_zachowanie == 0 %} Nie {% elif item.nerwowe_zachowanie == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
+        // Dane dla wykresów (przekazane z widoku)
+        const wiekLabels = {{ wiek_labels|safe }};
+        const wiekData = {{ wiek_data|safe }};
+        const poczucieSmutkuLabels = {{ poczucie_smutku_labels|safe }};
+        const poczucieSmutkuData = {{ poczucie_smutku_data|safe }};
+        const nerwoweZachowanieLabels = {{ nerwowe_zachowanie_labels|safe }};
+        const nerwoweZachowanieData = {{ nerwowe_zachowanie_data|safe }};
+        const problemyZeSpaniemLabels = {{ problemy_ze_spaniem_labels|safe }};
+        const problemyZeSpaniemData = {{ problemy_ze_spaniem_data|safe }};
+        const problemyZKoncentracjaLabels = {{ problemy_z_koncentracja_labels|safe }};
+        const problemyZKoncentracjaData = {{ problemy_z_koncentracja_data|safe }};
+        const przejadanieSieLabels = {{ przejadanie_sie_labels|safe }};
+        const przejadanieSieData = {{ przejadanie_sie_data|safe }};
+        const poczucieWinyLabels = {{ poczucie_winy_labels|safe }};
+        const poczucieWinyData = {{ poczucie_winy_data|safe }};
+        const problemZPrzywiazaniemLabels = {{ problem_z_przywiazaniem_labels|safe }};
+        const problemZPrzywiazaniemData = {{ problem_z_przywiazaniem_data|safe }};
+        const probaSamobojczaLabels = {{ proba_samobojcza_labels|safe }};
+        const probaSamobojczaData = {{ proba_samobojcza_data|safe }};
 
-    <div class="response-stats">
-        <h3>Problemy ze spaniem</h3>
-        <ul>
-            {% for item in problemy_ze_spaniem_stats %}
-            <li>{% if item.problemy_ze_spaniem == 0 %} Nie {% elif item.problemy_ze_spaniem == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
+        // Przetłumacz odpowiedzi
+        const translateLabels = (labels) => {
+            return labels.map(label => {
+                if (label === 0) return 'Nie';
+                else if (label === 1) return 'Czasami';
+                else return 'Tak';
+            });
+        }
 
-    <div class="response-stats">
-        <h3>Problemy z koncentracją</h3>
-        <ul>
-            {% for item in problemy_z_koncentracja_stats %}
-            <li>{% if item.problemy_z_koncentracja == 0 %} Nie {% elif item.problemy_z_koncentracja == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="response-stats">
-        <h3>Przejadanie się lub niedojadanie</h3>
-        <ul>
-            {% for item in przejadanie_sie_stats %}
-            <li>{% if item.przejadanie_sie == 0 %} Nie {% elif item.przejadanie_sie == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="response-stats">
-        <h3>Poczucie winy</h3>
-        <ul>
-            {% for item in poczucie_winy_stats %}
-            <li>{% if item.poczucie_winy == 0 %} Nie {% elif item.poczucie_winy == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="response-stats">
-        <h3>Problem z przywiązaniem do dziecka</h3>
-        <ul>
-            {% for item in problem_z_przywiazaniem_stats %}
-            <li>{% if item.problem_z_przywiazaniem == 0 %} Nie {% elif item.problem_z_przywiazaniem == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="response-stats">
-        <h3>Próba samobójcza</h3>
-        <ul>
-            {% for item in proba_samobojcza_stats %}
-            <li>{% if item.proba_samobojcza == 0 %} Nie {% elif item.proba_samobojcza == 1 %} Czasami {% else %} Tak {% endif %} : {{ item.percent }}%</li>
-            {% endfor %}
-        </ul>
-    </div>
+        // Tworzenie wykresów
+        createChart(document.getElementById('wiekChart').getContext('2d'), translateLabels(wiekLabels), wiekData, 'Wiek');
+        createChart(document.getElementById('poczucieSmutkuChart').getContext('2d'), translateLabels(poczucieSmutkuLabels), poczucieSmutkuData, 'Poczucie Smutku');
+        createChart(document.getElementById('nerwoweZachowanieChart').getContext('2d'), translateLabels(nerwoweZachowanieLabels), nerwoweZachowanieData, 'Nerwowe Zachowanie');
+        createChart(document.getElementById('problemyZeSpaniemChart').getContext('2d'), translateLabels(problemyZeSpaniemLabels), problemyZeSpaniemData, 'Problemy ze Spaniem');
+        createChart(document.getElementById('problemyZKoncentracjaChart').getContext('2d'), translateLabels(problemyZKoncentracjaLabels), problemyZKoncentracjaData, 'Problemy z Koncentracją');
+        createChart(document.getElementById('przejadanieSieChart').getContext('2d'), translateLabels(przejadanieSieLabels), przejadanieSieData, 'Przejadanie Się');
+        createChart(document.getElementById('poczucieWinyChart').getContext('2d'), translateLabels(poczucieWinyLabels), poczucieWinyData, 'Poczucie Winy');
+        createChart(document.getElementById('problemZPrzywiazaniemChart').getContext('2d'), translateLabels(problemZPrzywiazaniemLabels), problemZPrzywiazaniemData, 'Problem z Przywiązaniem');
+        createChart(document.getElementById('probaSamobojczaChart').getContext('2d'), translateLabels(probaSamobojczaLabels), probaSamobojczaData, 'Próba Samobójcza');
+    </script>
 </body>
 </html>
+
 {% endblock %}

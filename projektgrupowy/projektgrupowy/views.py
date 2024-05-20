@@ -36,43 +36,47 @@ def stats(request):
 
 
 def wyniki_list(request):
-    wyniki = Wynik.objects.all()
-
-    # Pobierz odpowiedzi dla każdego pola
-    wiek_stats = Wynik.objects.values('wiek').annotate(count=Count('wiek'))
-    poczucie_smutku_stats = Wynik.objects.values('poczucie_smutku').annotate(count=Count('poczucie_smutku'))
-    nerwowe_zachowanie_stats = Wynik.objects.values('nerwowe_zachowanie').annotate(count=Count('nerwowe_zachowanie'))
-    problemy_ze_spaniem_stats = Wynik.objects.values('problemy_ze_spaniem').annotate(count=Count('problemy_ze_spaniem'))
-    problemy_z_koncentracja_stats = Wynik.objects.values('problemy_z_koncentracja').annotate(
-        count=Count('problemy_z_koncentracja'))
-    przejadanie_sie_stats = Wynik.objects.values('przejadanie_sie').annotate(count=Count('przejadanie_sie'))
-    poczucie_winy_stats = Wynik.objects.values('poczucie_winy').annotate(count=Count('poczucie_winy'))
-    problem_z_przywiazaniem_stats = Wynik.objects.values('problem_z_przywiazaniem').annotate(
-        count=Count('problem_z_przywiazaniem'))
-    proba_samobojcza_stats = Wynik.objects.values('proba_samobojcza').annotate(count=Count('proba_samobojcza'))
-    wynik_stats = Wynik.objects.values('wynik').annotate(count=Count('wynik'))
-
     total_count = Wynik.objects.count()  # Całkowita liczba obserwacji
 
+    # Lista pól do statystyk
+    fields = [
+        'wiek', 'poczucie_smutku', 'nerwowe_zachowanie', 'problemy_ze_spaniem',
+        'problemy_z_koncentracja', 'przejadanie_sie', 'poczucie_winy',
+        'problem_z_przywiazaniem', 'proba_samobojcza'
+    ]
+
+    stats = {}
+    for field in fields:
+        stats[field] = list(Wynik.objects.values(field).annotate(count=Count(field)))
+
     # Przekształć dane na procentowe udziały
-    for stat in [wiek_stats, poczucie_smutku_stats, nerwowe_zachowanie_stats, problemy_ze_spaniem_stats,
-                 problemy_z_koncentracja_stats, przejadanie_sie_stats, poczucie_winy_stats,
-                 problem_z_przywiazaniem_stats, proba_samobojcza_stats, wynik_stats ]:
-        for s in stat:
+    for field in fields:
+        for s in stats[field]:
             s['percent'] = (s['count'] / total_count) * 100 if total_count > 0 else 0
 
-    return render(request, 'wyniki_list.html', {
-        'wiek_stats': wiek_stats,
-        'poczucie_smutku_stats': poczucie_smutku_stats,
-        'nerwowe_zachowanie_stats': nerwowe_zachowanie_stats,
-        'problemy_ze_spaniem_stats': problemy_ze_spaniem_stats,
-        'problemy_z_koncentracja_stats': problemy_z_koncentracja_stats,
-        'przejadanie_sie_stats': przejadanie_sie_stats,
-        'poczucie_winy_stats': poczucie_winy_stats,
-        'problem_z_przywiazaniem_stats': problem_z_przywiazaniem_stats,
-        'proba_samobojcza_stats': proba_samobojcza_stats,
-        'wynik_stats' : wynik_stats
-    })
+    context = {
+        'wiek_labels': [item['wiek'] for item in stats['wiek']],
+        'wiek_data': [item['percent'] for item in stats['wiek']],
+        'poczucie_smutku_labels': [item['poczucie_smutku'] for item in stats['poczucie_smutku']],
+        'poczucie_smutku_data': [item['percent'] for item in stats['poczucie_smutku']],
+        'nerwowe_zachowanie_labels': [item['nerwowe_zachowanie'] for item in stats['nerwowe_zachowanie']],
+        'nerwowe_zachowanie_data': [item['percent'] for item in stats['nerwowe_zachowanie']],
+        'problemy_ze_spaniem_labels': [item['problemy_ze_spaniem'] for item in stats['problemy_ze_spaniem']],
+        'problemy_ze_spaniem_data': [item['percent'] for item in stats['problemy_ze_spaniem']],
+        'problemy_z_koncentracja_labels': [item['problemy_z_koncentracja'] for item in stats['problemy_z_koncentracja']],
+        'problemy_z_koncentracja_data': [item['percent'] for item in stats['problemy_z_koncentracja']],
+        'przejadanie_sie_labels': [item['przejadanie_sie'] for item in stats['przejadanie_sie']],
+        'przejadanie_sie_data': [item['percent'] for item in stats['przejadanie_sie']],
+        'poczucie_winy_labels': [item['poczucie_winy'] for item in stats['poczucie_winy']],
+        'poczucie_winy_data': [item['percent'] for item in stats['poczucie_winy']],
+        'problem_z_przywiazaniem_labels': [item['problem_z_przywiazaniem'] for item in stats['problem_z_przywiazaniem']],
+        'problem_z_przywiazaniem_data': [item['percent'] for item in stats['problem_z_przywiazaniem']],
+        'proba_samobojcza_labels': [item['proba_samobojcza'] for item in stats['proba_samobojcza']],
+        'proba_samobojcza_data': [item['percent'] for item in stats['proba_samobojcza']],
+    }
+
+    return render(request, 'wyniki_list.html', context)
+
 
 
 xgb_model = pickle.load(open('xgbClassifier.pkl', "rb"))
