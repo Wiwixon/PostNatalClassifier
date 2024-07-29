@@ -29,4 +29,9 @@ This project aims to develop, implement, and evaluate a web system for the early
 - **Research:** Study the system's effectiveness across different populations.
 
 ## Kaggle Project
-For detailed information on the data analysis and model development, you can view the Kaggle notebook associated with this project: [Postpartum Depression Classifier Project](https://www.kaggle.com/code/miloszpg/postpartum-depression-classifier-project/).
+- For detailed information on the data analysis and model development, you can view the Kaggle notebook associated with this project: [Postpartum Depression Classifier Project](https://www.kaggle.com/code/miloszpg/postpartum-depression-classifier-project/).
+
+## Authors
+- Miłosz Bakiera s188745
+- Wiktor Kowalczyk s188895
+- Marcin Sutor s188637
